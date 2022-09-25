@@ -1,23 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import questionsArray from "./data";
+import Questions from "./components/Questions";
 
 function App() {
+  const [answer, setAnswer] = useState({
+    recommendation: {
+      question: "",
+      value: "",
+      conditionalQuestion: false,
+    },
+    helpful: {
+      question: "",
+      value: "",
+      conditionalQuestion: false,
+    },
+    experience: {
+      question: "",
+      value: "",
+      conditionalQuestion: false,
+    },
+  });
+
+  // handle submit form
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <Questions
+          questionsArray={questionsArray}
+          answer={answer}
+          setAnswer={setAnswer}
+        />
+        <input type="submit" />
+      </form>
     </div>
   );
 }
